@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,9 @@ public class ControlerServlet extends HttpServlet {
         try {
             Class classe = Class.forName("br.ufpr.logica."+nome);
             Logica logica = (Logica)classe.newInstance();
-            logica.executa(request, response);
+            String visao = logica.executa(request, response);
+            RequestDispatcher rd = request.getRequestDispatcher(visao);
+            rd.forward(request, response);
             
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ControlerServlet.class.getName()).log(Level.SEVERE, null, ex);
