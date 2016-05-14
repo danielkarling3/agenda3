@@ -39,45 +39,14 @@ public class AdicionaContatoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String nome = request.getParameter("nome");
-		String email = request.getParameter("email");
-		String endereco = request.getParameter("endereco");
-		String dataNascimentoTexto = request.getParameter("dataNascimento");
-
-	
-	
-
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-
-		Calendar dataNascimento = Calendar.getInstance();
-		try {
-			dataNascimento.setTime(sdf.parse(dataNascimentoTexto));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
-
-
-		
-		gravarBanco(nome, email, endereco, dataNascimento);
-                
+		                
                 RequestDispatcher rd = request.getRequestDispatcher("/contato-adicionado.jsp");
                 rd.forward(request, response);
 
 		//response.sendRedirect("listar-contatos.jsp");
 	}
 
-	protected void gravarBanco(String nome, String email, String endereco, Calendar dataNascimento) {
-		Contato contato = new Contato(nome, email, endereco, dataNascimento);
-		ContatoDao dao = new ContatoDao();
-
-		System.out.println("novo DAO");
-		dao.adiciona(contato);
-		System.out.println(contato.getNome());
-
-	}
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

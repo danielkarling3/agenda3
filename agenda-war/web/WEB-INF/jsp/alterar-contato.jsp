@@ -29,7 +29,7 @@
         %>
 
         <form role="form"
-              action="alteraContatoServlet?id=<%=contato.getID()%>" method="POST">
+              action="mvc?logica=AlteraContatoLogica&id=<%=contato.getID()%>" method="POST">
             <div class="container">
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -66,7 +66,7 @@
                         </div>
                         <button type="submit" class="btn btn-info">Alterar</button>
                         <button type="button" class="btn btn-info"
-                                onclick="window.location.href = 'listar-contatos.jsp';">Voltar</button>
+                                onclick="window.location.href = 'mvc?logica=ListaContatosLogica';">Voltar</button>
 
                     </div>
                 </div>

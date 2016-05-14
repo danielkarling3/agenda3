@@ -24,39 +24,41 @@
             <c:import url="cabecalho.jsp"></c:import>
             </center>
             <br>
-        <jsp:useBean id="dao" class="br.ufpr.dao.ContatoDao"></jsp:useBean>
+        
 
-
-
-        <% request.setAttribute("tabela", new ContatoDao().getLista());%>
-
+       
+       
         <div class="container"> 
             <div class="panel panel-info">
                 <div class="panel-heading"> 
-                    <center>Listar Contatos</center>
+                    <center>Lista de Contatos</center>
                 </div> 
                 <div class="panel-info"> 
 
 
 
-                    <display:table name="tabela"  class="table">
-                        <display:column property="nome" title="nome"></display:column>
-                        <display:column property="email" title="email"></display:column>
+                    <display:table name="contatos"  class="table">
+                        <display:column property="ID"  class="btn btn-info" title="Alterar" href="alterar-contato.jsp" paramId="id"></display:column>
+                        <display:column property="nome" title="Nome"></display:column>
 
-                        <display:column property="endereco" title="endereço"></display:column>
-                        <display:column property="dataNascimento" title="data de nascimento"></display:column>
+                        <display:column property="email" href= "mailto:email">email title="E-mail"></display:column>
+                       
+                        <display:column  property="endereco" title="Endereço"></display:column>
+                        <%--<display:column property="dataNascimento" title="data de nascimento"></display:column>--%>  
 
-                        
+                        <display:column property="ID"  class="btn btn-info" title="Deletar" href="mvc?logica=DeletaContatoLogica" paramId="id"></display:column>
+
                         </div>
-                    </display:table>
-
+                </display:table>
+                <center>
                     <button align="center" class="btn btn-info" 
                             onclick="window.location.href = 'adiciona-contato.jsp';"> 
                         Adicionar Contato</button> 
-                </div>
+                </center>
             </div>
-        </div> 
+        </div>
     </div> 
+</div> 
 </div>
 <c:import url="rodape.jsp"></c:import>
 </body>

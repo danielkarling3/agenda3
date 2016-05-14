@@ -25,124 +25,139 @@ import sun.util.resources.cldr.CalendarData;
 
 public class ContatoDao {
 
-	private Connection connection;
+    private Connection connection;
 
-	public ContatoDao() {
+    public ContatoDao() {
 
-		this.connection = new ConectionFactory().getConnection();
+        this.connection = new ConectionFactory().getConnection();
 
-	}
+    }
 
-	public Contato buscaContato(Long id) {
-		Contato contato = new Contato();
-		String sql = "select * from contatos where id =" + id;
+    public Contato buscaContato(Long id) {
+        Contato contato = new Contato();
+        String sql = "select * from contatos where id =" + id;
 
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
-			ResultSet select = stmt.executeQuery();
-			while (select.next()) {
-				contato.setID(select.getLong("id"));
-				contato.setNome(select.getString("nome"));
-				contato.setEmail(select.getString("email"));
-				contato.setEndereco(select.getString("endereco"));
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet select = stmt.executeQuery();
+            while (select.next()) {
+                contato.setID(select.getLong("id"));
+                contato.setNome(select.getString("nome"));
+                contato.setEmail(select.getString("email"));
+                contato.setEndereco(select.getString("endereco"));
 
-				Date datanascimentoDate = select.getDate("dataNascimento");
+                Date datanascimentoDate = select.getDate("dataNascimento");
 
-				Calendar dataNascimento = Calendar.getInstance();
-				dataNascimento.setTime(datanascimentoDate);
-				contato.setDataNascimento(dataNascimento);
-			}
+                Calendar dataNascimento = Calendar.getInstance();
+                dataNascimento.setTime(datanascimentoDate);
+                contato.setDataNascimento(dataNascimento);
+            }
 
-			select.close();
-			// stmt.execute();
-			stmt.close();
+            select.close();
+            // stmt.execute();
+            stmt.close();
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
-		return contato;
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+        return contato;
 
-	}
+    }
 
-	public void adiciona(Contato contato) {
+    public void adiciona(Contato contato) {
 
-		String sql = "insert into contatos " + "(nome,email,endereco,dataNascimento)" + "values (?,?,?,?)";
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setString(1, contato.getNome());
-			stmt.setString(2, contato.getEmail());
-			stmt.setString(3, contato.getEndereco());
-			stmt.setDate(4, new java.sql.Date(contato.getDataNascimento().getTimeInMillis()));
+        String sql = "insert into contatos " + "(nome,email,endereco,dataNascimento)" + "values (?,?,?,?)";
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, contato.getNome());
+            stmt.setString(2, contato.getEmail());
+            stmt.setString(3, contato.getEndereco());
+            stmt.setDate(4, new java.sql.Date(contato.getDataNascimento().getTimeInMillis()));
 
-			stmt.execute();
-			stmt.close();
+            stmt.execute();
+            stmt.close();
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
-	}
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+    }
 
-	public ArrayList<Contato> getLista() {
-		ArrayList<Contato> listaContatos = new ArrayList<Contato>();
+    public ArrayList<Contato> getLista() {
+        ArrayList<Contato> listaContatos = new ArrayList<Contato>();
 
-		String sql = "select * from contatos ";
+        String sql = "select * from contatos ";
 
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
-			ResultSet select = stmt.executeQuery();
-			while (select.next()) {
-				Contato contato = new Contato();
-				contato.setID(select.getLong("id"));
-				contato.setNome(select.getString("nome"));
-				contato.setEmail(select.getString("email"));
-				contato.setEndereco(select.getString("endereco"));
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            ResultSet select = stmt.executeQuery();
+            while (select.next()) {
+                Contato contato = new Contato();
+                contato.setID(select.getLong("id"));
+                contato.setNome(select.getString("nome"));
+                contato.setEmail(select.getString("email"));
+                contato.setEndereco(select.getString("endereco"));
 
-				Date datanascimentoDate = select.getDate("dataNascimento");
+                Date datanascimentoDate = select.getDate("dataNascimento");
 
-				Calendar dataNascimento = Calendar.getInstance();
-				dataNascimento.setTime(datanascimentoDate);
-				contato.setDataNascimento(dataNascimento);
-				listaContatos.add(contato);
-			}
+                Calendar dataNascimento = Calendar.getInstance();
+                dataNascimento.setTime(datanascimentoDate);
+                contato.setDataNascimento(dataNascimento);
+                listaContatos.add(contato);
+            }
 
-			select.close();
-			// stmt.execute();
-			stmt.close();
+            select.close();
+            // stmt.execute();
+            stmt.close();
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
 
-		return listaContatos;
+        return listaContatos;
 
-	}
+    }
 
-	public void alterar(Contato contato) {
+    public void alterar(Contato contato) {
 
-		String sql = "update  contatos set nome=?,email=?,endereco=?,dataNascimento=? where id ="
-				+contato.getID();
-		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
-			stmt.setString(1, contato.getNome());
-			stmt.setString(2, contato.getEmail());
-			stmt.setString(3, contato.getEndereco());
-			stmt.setDate(4, new java.sql.Date(contato.getDataNascimento().getTimeInMillis()));
+        String sql = "update  contatos set nome=?,email=?,endereco=?,dataNascimento=? where id ="
+                + contato.getID();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.setString(1, contato.getNome());
+            stmt.setString(2, contato.getEmail());
+            stmt.setString(3, contato.getEndereco());
+            stmt.setDate(4, new java.sql.Date(contato.getDataNascimento().getTimeInMillis()));
 
-			stmt.execute();
-			stmt.close();
+            stmt.execute();
+            stmt.close();
 
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
 
-	}
+    }
+
+    public void deletar(Contato contato) {
+        String sql = "delete from contatos where id =" + contato.getID();
+        try {
+            PreparedStatement stmt = connection.prepareStatement(sql);
+            stmt.execute();
+            stmt.close();
+
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw new RuntimeException();
+        }
+
+    }
 
 }

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : contato-adicionado
-    Created on : 12/05/2016, 19:41:47
+    Document   : contato-deletado
+    Created on : 13/05/2016, 21:11:13
     Author     : danielkarling
 --%>
 
@@ -18,10 +18,10 @@
         <br>
         <div class="container">
             
-                Contato ${param.nome} adicionado com sucesso
+                Contato ${param.nome} deletado com sucesso
         </div>
         <br>
         <button align ="center" type="button" class="btn btn-info"
-                onclick="window.location.href = 'mvc?logica=ListaContatosLogica';">Voltar</button>
+                onclick="window.location.href = 'listar-contatos.jsp';">Voltar</button>
     </body>
 </html>

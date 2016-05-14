@@ -19,7 +19,7 @@
 
     </head>
     <body>
-        <form role="form" action="adicionaContato" method="get">
+        <form role="form" action="mvc?logica=AdicionaContatoLogica" method="POST">
             <div class="container">
                 <div class="panel panel-info">
                     <div class="panel-heading">
@@ -53,7 +53,7 @@
 
                         <button type="submit" class="btn btn-info">Adicionar</button>
                         <button type="button" class="btn btn-info"
-                                onclick="window.location.href = 'listar-contatos.jsp';">Voltar</button>
+                                onclick="window.location.href = 'mvc?logica=ListaContatosLogica';">Voltar</button>
 
                     </div>
                 </div>
