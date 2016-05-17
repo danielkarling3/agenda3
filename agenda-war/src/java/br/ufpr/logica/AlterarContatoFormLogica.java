@@ -5,9 +5,6 @@
  */
 package br.ufpr.logica;
 
-import br.ufpr.dao.ContatoDao;
-import br.ufpr.modelo.Contato;
-import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,15 +12,12 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author danielkarling
  */
-public class ListaContatosLogica implements Logica{
+public class AlterarContatoFormLogica implements Logica {
 
     @Override
     public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ContatoDao dao = new ContatoDao();
-        List<Contato>  contatos = dao.getLista();
-        request.setAttribute("contatos", contatos);        
-        return "/WEB-INF/jsp/listar-contatos.jsp";
-        
-    }
     
+               
+        return "/WEB-INF/jsp/alterar-contato.jsp?id="+request.getParameter("id");
+    }
 }

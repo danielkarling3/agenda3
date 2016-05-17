@@ -39,19 +39,16 @@ public class AdicionaContatoLogica implements Logica {
         }
 
         gravarBanco(nome, email, endereco, dataNascimento);
-        return "contato-adicionado.jsp";
+        return "/WEB-INF/jsp/contato-adicionado.jsp";
     }
-
-    
+   
     
 
     protected void gravarBanco(String nome, String email, String endereco, Calendar dataNascimento) {
         Contato contato = new Contato(nome, email, endereco, dataNascimento);
         ContatoDao dao = new ContatoDao();
 
-        System.out.println("novo DAO");
         dao.adiciona(contato);
-        System.out.println(contato.getNome());
 
     }
 }

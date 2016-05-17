@@ -3,7 +3,7 @@
 <%@ taglib tagdir="/WEB-INF/tags" prefix="myTags"%>
 
 <!DOCTYPE html>
-<html>
+<html> 
     <head>
         <meta charset="UTF-8">
         <title>adicionar contato</title>

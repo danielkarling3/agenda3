@@ -18,14 +18,14 @@ public class DeletaContatoLogica implements Logica {
 
     @Override
     public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        System.out.println(request.getParameter("id"));
-
+        System.out.println("br.ufpr.logica.DeletaContatoLogica.executa()");
         Long id = Long.parseLong(request.getParameter("id"));
 
         deletarDoBanco(id);
         return "mvc?logica=ListaContatosLogica";
     }
-    protected void deletarDoBanco(Long id){
+
+    protected void deletarDoBanco(Long id) {
         Contato contato = new Contato();
         contato.setID(id);
         ContatoDao dao = new ContatoDao();

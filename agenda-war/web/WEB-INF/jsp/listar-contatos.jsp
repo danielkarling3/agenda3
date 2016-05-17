@@ -19,46 +19,79 @@
         <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
+        
+         <%
+            String idS = request.getParameter("contatos");
+        %>
         <br>
         <center>
             <c:import url="cabecalho.jsp"></c:import>
             </center>
             <br>
-        
-
-       
-       
-        <div class="container"> 
-            <div class="panel panel-info">
-                <div class="panel-heading"> 
-                    <center>Lista de Contatos</center>
-                </div> 
-                <div class="panel-info"> 
 
 
 
-                    <display:table name="contatos"  class="table">
-                        <display:column property="ID"  class="btn btn-info" title="Alterar" href="alterar-contato.jsp" paramId="id"></display:column>
-                        <display:column property="nome" title="Nome"></display:column>
 
-                        <display:column property="email" href= "mailto:email">email title="E-mail"></display:column>
-                       
-                        <display:column  property="endereco" title="Endereço"></display:column>
-                        <%--<display:column property="dataNascimento" title="data de nascimento"></display:column>--%>  
+            <div class="container"> 
+                <div class="panel panel-info">
+                    <div class="panel-heading"> 
+                        <center>Lista de Contatos</center>
+                    </div> 
+                    <div class="panel-info"> 
 
-                        <display:column property="ID"  class="btn btn-info" title="Deletar" href="mvc?logica=DeletaContatoLogica" paramId="id"></display:column>
+                        <table class="table"> 
 
-                        </div>
-                </display:table>
-                <center>
-                    <button align="center" class="btn btn-info" 
-                            onclick="window.location.href = 'adiciona-contato.jsp';"> 
-                        Adicionar Contato</button> 
-                </center>
+                            <tr> 
+                                <td>ID:</td>
+                                <td>Nome:</td> 
+                                <td>Endereço:</td> 
+                                <td>Email:</td> 
+                                <td>Data de Nascimento:</td> 
+
+                            </tr> 
+
+                        <c:forEach var="contato" items="${contatos}"> 
+                            <tr> 
+                                 <td>${contato.ID}</td> 
+                                <td>${contato.nome}</td> 
+                                <td>${contato.endereco}</td> 
+
+                                <td><c:choose> 
+                                        <c:when test="${not empty contato.email}"> 
+                                            <a href="mailto:${contato.email}">${contato.email}</a> 
+                                        </c:when>
+                                        <c:otherwise> 
+                                            E-mail não informado! 
+                                        </c:otherwise> 
+                                    </c:choose></td> 
+
+                                <td><fmt:formatDate value="${contato.dataNascimento.time}" 
+                                                pattern="dd/MM/yyyy"></fmt:formatDate></td> 
+                                    <td> 
+                                        <button id="${contato.ID}" class="btn btn-info" 
+                                            onclick="window.location.href = 'mvc?logica=AlterarContatoFormLogica&id=${contato.ID}';"> 
+                                        Alterar</button> 
+                                </td> 
+                                <td> 
+                                    <button id="${contato.ID}" class="btn btn-warning" 
+                                            onclick="window.location.href ='mvc?logica=DeletaContatoLogica&id=${contato.ID}';"> 
+                                        Deletar</button> 
+                                </td> 
+
+                            </tr> 
+                        </c:forEach> 
+                    </table> 
+
+
+                    <center>
+                        <button align="center" class="btn btn-info" 
+                                onclick="window.location.href = 'mvc?logica=AdicionaContatoFormLogica';"> 
+                            Adicionar Contato</button> 
+                    </center>
+                </div>
             </div>
-        </div>
+        </div> 
     </div> 
-</div> 
 </div>
 <c:import url="rodape.jsp"></c:import>
 </body>
