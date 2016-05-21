@@ -12,7 +12,7 @@
 <script src="jquery-ui.js"></script>
 <!--     <script scr="http://code.jquery.com/jquery-1.9.1.js"></script> 
      <script scr="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script> -->
-<body>
+<!--<body>
 
     <jsp:useBean id="dao" class="br.ufpr.dao.ContatoDao" />
     <jsp:useBean id="contato" class="br.ufpr.modelo.Contato" />
@@ -48,6 +48,6 @@
         <button type="submit" class="btn btn-info">Deletar</button>
 
 
-    </form>
+    </form>-->
 
 </html>

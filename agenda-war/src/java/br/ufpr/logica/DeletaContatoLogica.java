@@ -7,6 +7,7 @@ package br.ufpr.logica;
 
 import br.ufpr.dao.ContatoDao;
 import br.ufpr.modelo.Contato;
+import java.sql.Connection;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,15 +21,15 @@ public class DeletaContatoLogica implements Logica {
     public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
         System.out.println("br.ufpr.logica.DeletaContatoLogica.executa()");
         Long id = Long.parseLong(request.getParameter("id"));
-
-        deletarDoBanco(id);
+        Connection conexao = (Connection) request.getAttribute("conexao");
+        deletarDoBanco(id, conexao);
         return "mvc?logica=ListaContatosLogica";
     }
 
-    protected void deletarDoBanco(Long id) {
+    protected void deletarDoBanco(Long id, Connection conexao) {
         Contato contato = new Contato();
         contato.setID(id);
-        ContatoDao dao = new ContatoDao();
+        ContatoDao dao = new ContatoDao(conexao);
         dao.deletar(contato);
     }
 }

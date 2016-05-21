@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 import javax.management.RuntimeErrorException;
 
-public class ConectionFactory {
+public class MysqlConectionFactory {
 
 	public Connection getConnection() {
 		try {

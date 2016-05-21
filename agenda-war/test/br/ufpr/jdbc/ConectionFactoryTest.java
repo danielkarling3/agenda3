@@ -8,7 +8,7 @@ public class ConectionFactoryTest {
 
 	@Test
 	public void testGetConnection() {
-		ConectionFactory factory = new ConectionFactory();
+		MysqlConectionFactory factory = new MysqlConectionFactory();
 		assertNotNull(factory.getConnection());
 		
 	}

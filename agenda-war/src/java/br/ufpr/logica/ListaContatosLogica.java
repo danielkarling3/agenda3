@@ -7,6 +7,7 @@ package br.ufpr.logica;
 
 import br.ufpr.dao.ContatoDao;
 import br.ufpr.modelo.Contato;
+import java.sql.Connection;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,8 @@ public class ListaContatosLogica implements Logica{
 
     @Override
     public String executa(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        ContatoDao dao = new ContatoDao();
+        Connection conexao = (Connection) request.getAttribute("conexao");
+        ContatoDao dao = new ContatoDao(conexao);
         List<Contato>  contatos = dao.getLista();
         request.setAttribute("contatos", contatos);        
         return "/WEB-INF/jsp/listar-contatos.jsp";

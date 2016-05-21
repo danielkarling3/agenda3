@@ -19,7 +19,7 @@ import com.sun.xml.internal.bind.v2.schemagen.xmlschema.SimpleType;
 import com.sun.xml.internal.txw2.Document;
 import com.sun.xml.internal.txw2.TypedXmlWriter;
 
-import br.ufpr.jdbc.ConectionFactory;
+import br.ufpr.jdbc.MysqlConectionFactory;
 import br.ufpr.modelo.Contato;
 import sun.util.resources.cldr.CalendarData;
 
@@ -27,9 +27,9 @@ public class ContatoDao {
 
     private Connection connection;
 
-    public ContatoDao() {
+    public ContatoDao(Connection connection) {
 
-        this.connection = new ConectionFactory().getConnection();
+        this.connection = connection;
 
     }
 

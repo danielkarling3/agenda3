@@ -7,6 +7,7 @@ package br.ufpr.logica;
 
 import br.ufpr.dao.ContatoDao;
 import br.ufpr.modelo.Contato;
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,18 +46,21 @@ public class AlteraContatoLogica implements Logica {
 
         System.out.println(sdf.format(dataNascimento.getTime()));
 
-        gravarBanco(id, nome, email, endereco, dataNascimento);
+         Connection conexao = (Connection) request.getAttribute("conexao");
+         
+        System.out.println("conexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxao\n");
+        gravarBanco(id, nome, email, endereco, dataNascimento, conexao);
          return "mvc?logica=ListaContatosLogica";
     }
 
-    protected void gravarBanco(Long id, String nome, String email, String endereco, Calendar dataNascimento) {
+    protected void gravarBanco(Long id, String nome, String email, String endereco, Calendar dataNascimento, Connection conexao) {
         Contato contato = new Contato();
         contato.setDataNascimento(dataNascimento);
         contato.setEmail(email);
         contato.setID(id);
         contato.setNome(nome);
         contato.setEndereco(endereco);
-        ContatoDao dao = new ContatoDao();
+        ContatoDao dao = new ContatoDao(conexao);
 
         System.out.println("novo DAO");
         dao.alterar(contato);

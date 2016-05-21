@@ -8,7 +8,8 @@
 </head>
 <body>
 
-Copyright
+ <br><br>   
+ Desenvolvido por <br> Daniel A. Karling
 
 </body>
 </html>

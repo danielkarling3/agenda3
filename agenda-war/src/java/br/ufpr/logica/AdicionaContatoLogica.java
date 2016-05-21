@@ -7,6 +7,7 @@ package br.ufpr.logica;
 
 import br.ufpr.dao.ContatoDao;
 import br.ufpr.modelo.Contato;
+import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,15 +39,17 @@ public class AdicionaContatoLogica implements Logica {
             throw new RuntimeException();
         }
 
-        gravarBanco(nome, email, endereco, dataNascimento);
+        Connection conexao = (Connection) request.getAttribute("conexao");
+        gravarBanco(nome, email, endereco, dataNascimento, conexao);
         return "/WEB-INF/jsp/contato-adicionado.jsp";
     }
    
     
 
-    protected void gravarBanco(String nome, String email, String endereco, Calendar dataNascimento) {
+    protected void gravarBanco(String nome, String email, String endereco, Calendar dataNascimento, Connection conexao) {
         Contato contato = new Contato(nome, email, endereco, dataNascimento);
-        ContatoDao dao = new ContatoDao();
+        
+        ContatoDao dao = new ContatoDao(conexao);
 
         dao.adiciona(contato);
 

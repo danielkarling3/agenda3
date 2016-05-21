@@ -17,11 +17,14 @@
     <body>
         <br>
         <div class="container">
-            
+            <center>
                 Contato ${param.nome} adicionado com sucesso
+            </center>
         </div>
         <br>
+    <center>
         <button align ="center" type="button" class="btn btn-info"
                 onclick="window.location.href = 'mvc?logica=ListaContatosLogica';">Voltar</button>
+    </center>
     </body>
 </html>
